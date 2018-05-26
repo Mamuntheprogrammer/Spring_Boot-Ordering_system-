@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html lang="en-US" ng-app="digitalOrderSystemApp">
+<head>
+          <!-- all metatags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Mishu's Kitchen </title>
+	
+	                 <!-- google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=El+Messiri" rel="stylesheet">
+	
+	             <!-- all stylesheet -->
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/normalize.css}" />
+	<link rel="stylesheet" th:href="@{/css/font-awesome.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+	
+	
+	            <!-- icon and animate css -->
+	
+	<link rel="stylesheet" th:href="@{/css/hover.css}" />
+	<link rel="stylesheet" th:href="@{/css/animate.css}" />
+	<link rel="stylesheet"th:href="@{/css/imagehover.css}" />
+	                 <!-- jquery -->
+	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+	<script type="text/javascript" th:src="@{/js/angular.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/custom/digitalOrderSystemController.js}"></script>
+	
+</head>
+
+<body ng-controller="DigitalOrderSystemController" ng-init="appInit()">
+
+
+
+	  <header class="top">
+	  	
+		<div class="container">
+
+			<div class="row">
+				
+
+				<div class="col-lg-4">
+
+					
+					<div class="pimage">
+						 <img src="images/m.jpg" class="img-rounded" alt="profile">
+						 <br>
+                             <p>Name : Mamun</p>
+
+
+					</div>
+					<div class="pquota">
+						 <p>&quot;FOOD IS MY LIFE &quot;</p>
+                           <br>
+
+                       <!---
+
+                          <button  type="button" data-toggle=" modal" data-target="#moda1" class="btn btn-success btn-md" >LogIn</button>
+
+                          <button type="button" class="btn btn-primary btn-md">SignUp</button>
+                                 -->
+
+
+
+							<!-- modal login start -->
+
+				<button  type="button" data-toggle="modal" data-target="#moda1" class="btn btn-success btn-md hvr-grow-shadow"  >LogIn</button>
+                     <a href="login.html" target="_blank"><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">SignUp</button></a>
+				 
+
+						<div class="modal fade" id="moda1">
+							<div class="modal-dialog">
+								<div class="modal-content" id="modalbox">
+									<div class="modal-header">
+										
+										<h3 class="modal-title">LogIn Here </h3>
+										<button type="button" class="close" data-dismiss="modal">&times;
+											
+										</button>
+
+										
+									</div>
+									<div class="modal-body">
+
+										<div class="col-md-6 " >
+
+											<form action="" id="login">
+												<div class="form-group">
+													<lebel class="user" >User Name </lebel>
+													<div class="input-group">
+														<input type="text" class="form-control" name="t1" placeholder="Enter Username">
+
+													</div>
+												</div>
+												<div class="form-group">
+													<lebel class="password" >Password </lebel>
+													<div class="input-group">
+														<input type="text" class="form-control" name="t1" placeholder="Enter Password">
+
+													</div>
+												</div>
+
+
+												<a href="">Forget Password</a>
+												<br>
+												<div class="checkbox">
+													<lebel for="checkbox">
+														<input type="checkbox" name=""> Remember me </lebel>
+
+												</div>
+
+												<button class="btn btn-primary btn-block btn-md">LogIn</button>
+												<br>
+
+												<P> New User <a href="login.html" target="_blank">Click Here</a></P>
+
+
+
+											</form>
+											
+										</div>
+
+										<!-- form ends-->
+										
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					</div>
+
+
+				<div class="col-lg-5">
+					<div class="title">
+						<img src="images/yumyum.png" class="img-responsive" alt="<h1>  YUM-YUM </h1>" >
+  									
+  									<p>&quot;We Believe In Quality & Test &quot;</p>
+  									
+                     </div>
+
+
+				</div>
+
+				<div class="col-lg-3">
+							
+
+							<div class="row">
+								<img src="images/chef.png" class="img-circle" alt="Chef">
+							</div>
+							
+							<div class="row">
+								<div class="marqu">
+						 	 <marquee><h1> <img src="images/cup.png" class="img-rounded" alt="Chef"> Wel-Come <img src="images/glass.png" class="img-rounded" alt="Chef"> </h1></marquee>
+					             </div>	
+							</div>
+				</div>
+			</div>	
+
+		</div>
+	
+		</header>
+		<br><br>
+
+
+
+
+			<div class="mainbody">
+	             <div class="container" >
+					<div class="row">
+						
+
+
+
+                             <!-- categories section start -->
+
+
+					<div class="col-md-3" id="menu">
+
+						<form class="navbar-form" role="search">
+								    <div class="input-group add-on">
+								      <input class="form-control" ng-keyup="filterCategory(categorySearch)" ng-model="categorySearch" placeholder="Search Your Item " name="srch-term" id="srch-term" type="text">
+								      
+								        <button class="btn btn-success btn-md " type="submit">
+								        	<img src="images/searchicon.png" alt="search">
+								        	
+								        </button>
+								      
+								    </div>
+								    <br>
+
+								     <div class="itemtitle">
+								     	<center><h4>Catagories</h4></center>
+								     </div>
+								     <br>
+
+								     <div class="vertical-menu">
+										  
+										  <a href="javascript:showImage()" ng-click="findAllFoods()">ALL</a>
+										  <a href="" ng-repeat="category in categories"  ng-click="findFoodsByCategory(category.id)">{{category.name}}</a>
+										  <!-- <a href="#">DESI</a>
+										  <a href="#">CHINISE</a>
+										  <a href="#">JAPANIS</a>
+										  <a href="#">DRINKS</a>
+										  <a href="#">ICE CREAM</a>
+										  <a href="#">DESERT</a>
+										  <a href="#">FRY ITEMS</a>
+										  <a href="#">COFFE</a>
+										  <a href="#">IDIAN</a>
+										  <a href="#">FASR FOOD</a> -->
+									</div>
+								  
+
+
+								  <br><br>
+
+
+</div>
+
+							<!-- categories section end -->
+						<!-- food photo section start -->
+
+						<div class="col-md-4" id="item">
+	                          <form class="navbar-form" role="search">
+								    <div class="input-group add-on">
+								      <input class="form-control" ng-model="foodSearchText" ng-keyup="filterFood(foodSearchText)" placeholder="Search Your Food " name="srch-term" id="srch-term" type="text">
+								      
+								        <button class="btn btn-success btn-md " type="submit">
+								        	<img src="images/searchicon.png" alt="search">
+								        	
+								        </button>
+								     
+
+
+
+								    </div>
+								  </form>
+								  <br>
+
+					                  <div class="itemtitle">
+								     	  <center><h4>Foods Photos</h4></center>
+								     </div>
+								     <br>
+						
+					
+				<div class="container" >
+				<div class="row"> 
+					<div class="col-md-12" id="picgalery">
+						<div class="row">
+							<div class="col-md-4" ng-repeat="food in foods">
+								<div class="thumbnail">
+		      						<a href="" ng-click="addToChart(food)">
+			        						<img src="{{food.imagePath}}" alt="Lights" style="width:100%">
+			        						<div class="caption">
+			         					 	<p>{{food.name}}</p>
+			         					 	<b>{{food.price}}</b>.Tk
+			        						</div>
+		      						</a>
+		    						</div>
+	    						</div>
+    						</div>
+    						<p ng-if="foods.length==0">
+    							No food found
+    						</p>
+						<!-- <img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+						<img src="" alt="Nature" class="responsive">
+					    	
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+					
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+					
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+						<img src="nature.jpg" alt="Nature" class="responsive">
+ -->
+
+						</div>
+					
+
+				</div>
+				</div>
+					</div>
+
+					<!-- food photo section end -->
+
+
+							<!-- food cart section start -->
+
+
+
+
+					<div class="col-md-5" id="bill">
+						
+						<p>ghhhhhhhhhhhhhhhhh</p><i class="fab fa-searchengin"></i>
+						<table class="table">
+							<tr>
+								<th>Item name</th>
+								<th>Quantity</th>
+								<th>Price<th>
+								<th></th>
+							</tr>
+							<tr ng-repeat="item in chart">
+								<td>
+									{{item.name}}
+								</td>
+								<td>
+									{{item.quantity}}X{{item.price}}
+								</td>
+								<td>
+									{{item.quantity*item.price}}
+								</td>
+								<td>
+									<a  href="" ng-click="removeChartItem($index)">X</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									Total: <b>{{chartTotal()}}</b>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+
+
+							<!-- categories section end -->
+
+
+				</div>
+             </div>
+             </div>
+
+
+            
+
+
+	
+
+
+	
+	
+	
+	
+	
+	<script type="text/javascript">
+	"use strict";
+console.log('ihave a message');
+
+	
+	
+	
+	</script>
+</body>
+</html>

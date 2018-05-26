@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="digitalOrderSystemApp">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+             <!-- all stylesheet -->
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/normalize.css}" />
+	<link rel="stylesheet" th:href="@{/css/font-awesome.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+	
+	
+	            <!-- icon and animate css -->
+	
+	<link rel="stylesheet" th:href="@{/css/hover.css}" />
+	<link rel="stylesheet" th:href="@{/css/animate.css}" />
+	<link rel="stylesheet"th:href="@{/css/imagehover.css}" />
+	                 <!-- jquery -->
+	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+	<script type="text/javascript" th:src="@{/js/angular.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/custom/adminController.js}"></script>
+</head>
+<body ng-controller="AdminController" ng-init="appInit()">
+ <div class="container">
+  <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12 " id="regform">
+   	<h4>Add category</h4>
+   	<form method="post" name="categoryForm" ng-submit="addCategory(category, categoryForm)">
+	     <div class="form-group">
+	      <label class="control-label requiredField" for="name">
+	       Category Name
+	       <span class="asteriskField">
+	        *
+	       </span>
+	      </label>
+	      <input class="form-control" id="categoryName" name="name" ng-model="category.name" type="text" placeholder="Enter category name"/>
+	     </div>
+	     <div class="form-group">
+	     {{categoryCreateStatus}}
+	      <div>
+	       <button class="btn btn-primary " name="Add category" type="submit">
+	        Submit
+	       </button>
+	      </div>
+	     </div>
+     </form>
+     <br/>
+     <br/>
+    <h4>Add food</h4>
+    <form method="post" name="foodForm" ng-submit="addFood(food, foodForm)">
+     <div class="form-group ">
+      <label class="control-label requiredField" for="name">
+       name
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="name" name="name" ng-model="food.name" type="text" placeholder="Enter food Name"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="name1">
+       Food image path
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="imagePath" name="imagePath" ng-model="food.imagePath" type="text" placeholder="Enter image path (e.g. /images/imagename.jpg)"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="text">
+       Price
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="price" name="price" type="number" step="0.01" ng-model="food.price" placeholder="Enter food price"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="email">
+       Reduce price
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="reducePrice" name="reducePrice" step="0.01" type="number" ng-model="food.reducePrice" placeholder="Enter food reduce price"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="number">
+       Select category
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <select class="form-control" ng-model="food.categoryId" ng-options="cat.id as cat.name for cat in categories track by cat.id" ></select>
+     </div>
+     
+     <div class="form-group">
+     	{{foodCreateStatus}}
+      <div>
+       <button class="btn btn-primary " name="submit" type="submit">
+        Submit
+       </button>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+
+
+
+</body>
+</html>
