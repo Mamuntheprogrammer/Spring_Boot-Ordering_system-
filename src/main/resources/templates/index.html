@@ -324,6 +324,8 @@
 								</td>
 							</tr>
 						</table>
+						<!-- Trigger the modal with a button -->
+  						<button id="totalc" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#placeOrderDialog">Check out (Place order)</button>
 					</div>
 
 
@@ -355,5 +357,56 @@ console.log('ihave a message');
 	
 	
 	</script>
+	
+	<!-- Modal -->
+  <div class="modal fade" id="placeOrderDialog" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Place Order</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form method="post" name="orderForm" ng-submit="addOrder(order, orderForm)">
+		     <div class="form-group ">
+		      <label class="control-label requiredField" for="tableNo">
+		       Enter table number
+		       <span class="asteriskField">
+		        *
+		       </span>
+		      </label>
+		      <input class="form-control" id="tableNo" name="tableNo" ng-model="order.tableNo" type="text" placeholder="Enter table number"/>
+		     </div>
+		     <div class="form-group ">
+		      <label class="control-label requiredField" for="name1">
+		       Any comments ?
+		       <span class="asteriskField">
+		        
+		       </span>
+		      </label>
+		      <textarea class="form-control" id="comment" name="comment" ng-model="order.comment" type="text" placeholder="Any comment" ></textarea>
+		     </div>
+		     <div class="form-group">
+		      <div>
+		      	{{orderPlaceStatus}} 
+		      	<br/>
+		      	<br/>
+		       <button class="btn btn-primary " name="submit" type="submit" ng-disabled="orderPlaced">
+		        Place Order
+		       </button>
+		      </div>
+		     </div>
+		    </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 </body>
 </html>

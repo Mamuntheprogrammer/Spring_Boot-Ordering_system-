@@ -6,7 +6,7 @@ module.controller('DigitalOrderSystemController', ['$http', '$scope', '$window',
 	    $http.defaults.headers.common[header] = token;
 	    console.log(token);
 	    
-	    $scope.addArticle = function(article, form){
+	    /*$scope.addArticle = function(article, form){
         	
         	  	$http({
 	                method: "POST",
@@ -18,7 +18,7 @@ module.controller('DigitalOrderSystemController', ['$http', '$scope', '$window',
 	            		$scope.createStatus="Error in article creation";
 	            });
 
-        };
+        };*/
         
         $scope.appInit = function(){
         
@@ -31,6 +31,8 @@ module.controller('DigitalOrderSystemController', ['$http', '$scope', '$window',
 	            		$scope.categories = response.data;
 	            		
 	            		$scope.storedCategories = response.data;
+	            		
+	            		$scope.findAllFoods();
 	                
 	            }, function error(response) {
 	            });
@@ -113,6 +115,8 @@ module.controller('DigitalOrderSystemController', ['$http', '$scope', '$window',
         	 	item['quantity'] = 1;
         	 	$scope.chart.push(item);
         	 }
+        	 
+        	 $scope.orderPlaced = false;
         }
         
         $scope.chartTotal = function(){
@@ -126,6 +130,23 @@ module.controller('DigitalOrderSystemController', ['$http', '$scope', '$window',
 		
 		$scope.removeChartItem = function(index){
 			$scope.chart.splice(index, 1);
+		}
+		
+		$scope.addOrder=function(order, orderForm){
+			order['orderTotal'] = $scope.chartTotal();
+			order['userId'] = 0;
+			order['orderItems'] = $scope.chart;
+			$http({
+                method: "POST",
+                url: "/rest/dos/food/place_order",
+                data: order,
+            }).then(function mySucces(response) {
+            		$scope.orderPlaceStatus="Thanks for the order, your order will be process soon, your order number : "+response.data.id;
+            		$scope.chart = [];
+            		$scope.orderPlaced = true; 
+            }, function myError(response) {
+            		$scope.orderPlaceStatus="Error in article creation";
+            });
 		}
 
     }])
