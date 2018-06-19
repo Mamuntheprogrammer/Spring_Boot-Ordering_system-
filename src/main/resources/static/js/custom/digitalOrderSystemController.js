@@ -148,6 +148,26 @@ module.controller('DigitalOrderSystemController', ['$http', '$scope', '$window',
             		$scope.orderPlaceStatus="Error in article creation";
             });
 		}
+		
+		$scope.login = function(user,loginForm){
+			
+			$http({
+                method: "POST",
+                url: "/rest/dos/user/login",
+                data: user,
+            }).then(function mySucces(response) {
+            		if(response.data){
+            				$scope.loginStatus="Logn successfull";
+            				window.location = "/";
+            		}
+            		else{
+            			$scope.loginStatus="Error in login, username & password doesn't match";
+            		}
+            		
+            }, function myError(response) {
+            		$scope.loginStatus="Error in login, username & password doesn't match";
+            });
+		}
 
     }])
     

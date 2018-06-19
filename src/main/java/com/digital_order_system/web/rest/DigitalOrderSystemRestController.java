@@ -3,6 +3,8 @@ package com.digital_order_system.web.rest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.digital_order_system.domain.Category;
 import com.digital_order_system.domain.Food;
 import com.digital_order_system.domain.Order;
+import com.digital_order_system.domain.User;
 import com.digital_order_system.service.CategoryService;
 import com.digital_order_system.service.FoodService;
 import com.digital_order_system.service.OrderService;
+import com.digital_order_system.service.UserService;
 import com.digital_order_system.web.form.CategoryForm;
 import com.digital_order_system.web.form.FoodForm;
+import com.digital_order_system.web.form.LoginForm;
 import com.digital_order_system.web.form.OrderForm;
+import com.digital_order_system.web.form.UserForm;
 
 @RestController
 @RequestMapping(value="/rest/dos")
@@ -34,6 +40,9 @@ public class DigitalOrderSystemRestController {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping(value="/category/all")
 	public List<Category> getAll(){
 		return categoryService.getAll();
@@ -45,7 +54,14 @@ public class DigitalOrderSystemRestController {
 	}
 	
 	@PostMapping(value="/food/place_order")
-	public Order paceOrder(@RequestBody OrderForm orderForm) throws IllegalAccessException, InvocationTargetException{
+	public Order paceOrder(@RequestBody OrderForm orderForm, HttpServletRequest request) throws IllegalAccessException, InvocationTargetException{
+		
+		User user = (User)request.getSession().getAttribute("user");
+		
+		if(user != null){
+			orderForm.setUserId(user.getId());
+		}
+		
 		return orderService.addOrder(orderForm);
 	}
 	
@@ -68,5 +84,25 @@ public class DigitalOrderSystemRestController {
 		food.setCategory(category);
 		
 		return foodService.add(food);
+	}
+	
+	@PostMapping(value="/user/add")
+	public User addUser(@RequestBody UserForm userForm) {
+		
+		return userService.addUser(userForm);
+	}
+	
+	@PostMapping(value="/user/login")
+	public User login(@RequestBody LoginForm loginForm, HttpServletRequest request) {
+		
+		User user = userService.login(loginForm.getName1(), loginForm.getPassword());
+		
+		if(user != null){
+			request.getSession().setAttribute("user",user);
+		}
+		
+		User user1 = (User)request.getSession().getAttribute("user");
+		
+		return user;
 	}
 }

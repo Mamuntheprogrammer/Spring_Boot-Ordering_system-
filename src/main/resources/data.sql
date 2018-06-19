@@ -50,4 +50,17 @@ CREATE TABLE `final_project`.`order_info` (
   `order_id` INT NOT NULL,
   `quantity` INT(11) NOT NULL,
   PRIMARY KEY (`id`));
+  
+  
+  CREATE TABLE `final_project`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `name1` VARCHAR(100) NULL,
+  `quote` VARCHAR(255) NULL,
+  `email` VARCHAR(100) NULL,
+  `number` VARCHAR(100) NULL,
+  `password` VARCHAR(100) NULL,
+  `password1` VARCHAR(100) NULL,
+  `dob` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
 

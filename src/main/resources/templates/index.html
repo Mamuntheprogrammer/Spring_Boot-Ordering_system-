@@ -65,10 +65,12 @@
 
 							<!-- modal login start -->
 
-				<button  type="button" data-toggle="modal" data-target="#moda1" class="btn btn-success btn-md hvr-grow-shadow"  >LogIn</button>
-                     <a href="login.html" target="_blank"><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">SignUp</button></a>
-				 
-
+					 <button th:if="${user == null}"  type="button" data-toggle="modal" data-target="#moda1" class="btn btn-success btn-md hvr-grow-shadow"  >LogIn</button>
+                     <a th:if="${user == null}" href="/signup" target="_blank"><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">SignUp</button></a>
+				 		<div th:if="${user}">
+   							<h3> User : [[${user.name1}]] </h3>
+						</div>
+						
 						<div class="modal fade" id="moda1">
 							<div class="modal-dialog">
 								<div class="modal-content" id="modalbox">
@@ -85,18 +87,18 @@
 
 										<div class="col-md-6 " >
 
-											<form action="" id="login">
+											<form method="post" id="login" name="loginForm" ng-submit="login(user,loginForm)">
 												<div class="form-group">
 													<lebel class="user" >User Name </lebel>
 													<div class="input-group">
-														<input type="text" class="form-control" name="t1" placeholder="Enter Username">
+														<input type="text" class="form-control" name="t1" ng-model="user.name1" placeholder="Enter Username">
 
 													</div>
 												</div>
 												<div class="form-group">
 													<lebel class="password" >Password </lebel>
 													<div class="input-group">
-														<input type="text" class="form-control" name="t1" placeholder="Enter Password">
+														<input type="text" class="form-control" name="t1" ng-model="user.password" placeholder="Enter Password">
 
 													</div>
 												</div>
@@ -109,11 +111,12 @@
 														<input type="checkbox" name=""> Remember me </lebel>
 
 												</div>
-
-												<button class="btn btn-primary btn-block btn-md">LogIn</button>
+												{{loginStatus}}
+												<br/>
+												<button class="btn btn-primary btn-block btn-md" name="submit" type="submit">LogIn</button>
 												<br>
 
-												<P> New User <a href="login.html" target="_blank">Click Here</a></P>
+												<P> New User <a href="/signup" target="_blank">Click Here</a></P>
 
 
 
