@@ -66,7 +66,7 @@
 							<!-- modal login start -->
 
 				<button  type="button" data-toggle="modal" data-target="#moda1" class="btn btn-success btn-md hvr-grow-shadow"  >LogIn</button>
-                     <a href="login.html" target="_blank"><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">SignUp</button></a>
+                     <a href="login.html" target="_blank"> <button type="button" class="btn btn-primary btn-md hvr-grow-shadow" >SignUp</button></a>
 				 
 
 						<div class="modal fade" id="moda1">
@@ -251,14 +251,19 @@
 					<div class="col-md-12" id="picgalery">
 						<div class="row">
 							<div class="col-md-4" ng-repeat="food in foods">
-								
-		      						<a href="" ng-click="addToChart(food)">
-			        						<img src="{{food.imagePath}}" alt="Lights" >
-			        						<div class="caption">
+								    
+		      						<pre><a href="" ng-click="addToChart(food)">
+			        						<img src="{{food.imagePath }}" alt="Lights" ></pre>
+			        					
+			        					<div class="caption">
 			         					 	<p>{{food.name}}</p>
 			         					 	<b>{{food.price}}</b>.Tk
 			        						</div>
+			        				
+			        						
 		      						</a>
+		      						</br>
+		      						hello
 		    						
 	    						</div>
     						</div>
