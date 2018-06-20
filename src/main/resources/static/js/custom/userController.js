@@ -1,27 +1,31 @@
 module = angular.module('digitalOrderSystemApp', []);
-module.controller('AdminController', ['$http', '$scope', '$window', '$controller', function ($http, $scope, $window, $controller) {
+module.controller('UserController', ['$http', '$scope', '$window', '$controller', function ($http, $scope, $window, $controller) {
 	 	
 		var token = $("meta[name='_csrf']").attr("content");
 	    var header = $("meta[name='_csrf_header']").attr("content");
 	    $http.defaults.headers.common[header] = token;
-	    console.log(token);
+	   // console.log(token);
 	    
-	    $scope.addCategory = function(category, form){
+	    $scope.signUp = function(user, form){
         	
         	  	$http({
 	                method: "POST",
-	                url: "/rest/dos//admin/category/add",
-	                data: category,
+	                url: "/rest/dos/user/add",
+	                data: user,
 	            }).then(function mySucces(response) {
-	            		$scope.categoryCreateStatus="Category created";
-	            		$scope.appInit();
+	            		if(response.data.id){
+	            			$scope.usersignupStatus="You have signup successfully";
+	            		}
+	            		else{
+	            			$scope.usersignupStatus="There is a problem in signup, user may alreday exist";
+	            		}
 	            }, function myError(response) {
-	            		$scope.categoryCreateStatus="Error in category creation";
+	            		$scope.usersignupStatus="Error in signup";
 	            });
 
         };
         
-        $scope.addFood = function(food, form){
+        /*$scope.addFood = function(food, form){
         	
     	  	$http({
                 method: "POST",
@@ -47,7 +51,7 @@ module.controller('AdminController', ['$http', '$scope', '$window', '$controller
 	                
 	            }, function error(response) {
 	            });
-        };
+        };*/
         
        
     }])

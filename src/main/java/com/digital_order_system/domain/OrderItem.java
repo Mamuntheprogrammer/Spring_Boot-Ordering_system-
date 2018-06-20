@@ -1,24 +1,18 @@
 package com.digital_order_system.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@Table(name = "category")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Category {
+@Table(name = "order_item")
+public class OrderItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,16 +21,13 @@ public class Category {
 	@NotNull
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
-	private Set<Food> foods = new HashSet<>();
+	private Integer quantity;
 	
-	public Category() {
-		
-	}
+	private Float price;
 	
-	public Category(String name) {
-		this.name = name;
-	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id")
+	private Order order;
 
 	public Integer getId() {
 		return id;
@@ -53,4 +44,28 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	} 
 }

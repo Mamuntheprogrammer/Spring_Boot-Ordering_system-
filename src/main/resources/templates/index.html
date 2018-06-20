@@ -65,10 +65,12 @@
 
 							<!-- modal login start -->
 
-				<button  type="button" data-toggle="modal" data-target="#moda1" class="btn btn-success btn-md hvr-grow-shadow"  >LogIn</button>
-                     <a href="login.html" target="_blank"> <button type="button" class="btn btn-primary btn-md hvr-grow-shadow" >SignUp</button></a>
-				 
-
+					 <button th:if="${user == null}"  type="button" data-toggle="modal" data-target="#moda1" class="btn btn-success btn-md hvr-grow-shadow"  >LogIn</button>
+                     <a th:if="${user == null}" href="/signup" target="_blank"><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">SignUp</button></a>
+				 		<div th:if="${user}">
+   							<h3> User : [[${user.name1}]] </h3>
+						</div>
+						
 						<div class="modal fade" id="moda1">
 							<div class="modal-dialog">
 								<div class="modal-content" id="modalbox">
@@ -85,18 +87,18 @@
 
 										<div class="col-md-6 " >
 
-											<form action="" id="login">
+											<form method="post" id="login" name="loginForm" ng-submit="login(user,loginForm)">
 												<div class="form-group">
 													<lebel class="user" >User Name </lebel>
 													<div class="input-group">
-														<input type="text" class="form-control" name="t1" placeholder="Enter Username">
+														<input type="text" class="form-control" name="t1" ng-model="user.name1" placeholder="Enter Username">
 
 													</div>
 												</div>
 												<div class="form-group">
 													<lebel class="password" >Password </lebel>
 													<div class="input-group">
-														<input type="text" class="form-control" name="t1" placeholder="Enter Password">
+														<input type="text" class="form-control" name="t1" ng-model="user.password" placeholder="Enter Password">
 
 													</div>
 												</div>
@@ -109,11 +111,12 @@
 														<input type="checkbox" name=""> Remember me </lebel>
 
 												</div>
-
-												<button class="btn btn-primary btn-block btn-md">LogIn</button>
+												{{loginStatus}}
+												<br/>
+												<button class="btn btn-primary btn-block btn-md" name="submit" type="submit">LogIn</button>
 												<br>
 
-												<P> New User <a href="login.html" target="_blank">Click Here</a></P>
+												<P> New User <a href="/signup" target="_blank">Click Here</a></P>
 
 
 
@@ -251,19 +254,14 @@
 					<div class="col-md-12" id="picgalery">
 						<div class="row">
 							<div class="col-md-4" ng-repeat="food in foods">
-								    
-		      						<pre><a href="" ng-click="addToChart(food)">
-			        						<img src="{{food.imagePath }}" alt="Lights" ></pre>
-			        					
-			        					<div class="caption">
+								
+		      						<a href="" ng-click="addToChart(food)">
+			        						<img src="{{food.imagePath}}" alt="Lights" >
+			        						<div class="caption">
 			         					 	<p>{{food.name}}</p>
 			         					 	<b>{{food.price}}</b>.Tk
 			        						</div>
-			        				
-			        						
 		      						</a>
-		      						</br>
-		      						hello
 		    						
 	    						</div>
     						</div>
@@ -329,6 +327,8 @@
 								</td>
 							</tr>
 						</table>
+						<!-- Trigger the modal with a button -->
+  						<button id="totalc" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#placeOrderDialog">Check out (Place order)</button>
 					</div>
 
 
@@ -360,5 +360,56 @@ console.log('ihave a message');
 	
 	
 	</script>
+	
+	<!-- Modal -->
+  <div class="modal fade" id="placeOrderDialog" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Place Order</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form method="post" name="orderForm" ng-submit="addOrder(order, orderForm)">
+		     <div class="form-group ">
+		      <label class="control-label requiredField" for="tableNo">
+		       Enter table number
+		       <span class="asteriskField">
+		        *
+		       </span>
+		      </label>
+		      <input class="form-control" id="tableNo" name="tableNo" ng-model="order.tableNo" type="text" placeholder="Enter table number"/>
+		     </div>
+		     <div class="form-group ">
+		      <label class="control-label requiredField" for="name1">
+		       Any comments ?
+		       <span class="asteriskField">
+		        
+		       </span>
+		      </label>
+		      <textarea class="form-control" id="comment" name="comment" ng-model="order.comment" type="text" placeholder="Any comment" ></textarea>
+		     </div>
+		     <div class="form-group">
+		      <div>
+		      	{{orderPlaceStatus}} 
+		      	<br/>
+		      	<br/>
+		       <button class="btn btn-primary " name="submit" type="submit" ng-disabled="orderPlaced">
+		        Place Order
+		       </button>
+		      </div>
+		     </div>
+		    </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 </body>
 </html>

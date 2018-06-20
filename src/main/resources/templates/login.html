@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="digitalOrderSystemApp">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=El+Messiri" rel="stylesheet">
@@ -16,19 +16,22 @@
   <link rel="stylesheet" href="css/hover.css" />
   <link rel="stylesheet" href="css/animate.css" />
   <link rel="stylesheet" href="css/imagehover.css" />
-
-
+  
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+	<script type="text/javascript" th:src="@{/js/angular.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/custom/userController.js}"></script>
 </head>
 <body>
 
 
 
 
- <div class="container">
+ <div class="container" ng-controller="UserController">
   <div class="row">
    <div class="col-md-12 col-sm-12 col-xs-12 " id="regform">
     <h4>Fill-UP The Form</h4>
-    <form method="post">
+    <form method="post" name="userForm" ng-submit="signUp(user,userForm)">
      <div class="form-group ">
       <label class="control-label requiredField" for="name">
        Full Name
@@ -36,7 +39,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="name" name="name" type="text" placeholder="Enter Full Name"/>
+      <input class="form-control" id="name" name="name" ng-model="user.name" type="text" placeholder="Enter Full Name"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="name1">
@@ -45,7 +48,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="name1" name="name1" type="text" placeholder="@Username"/>
+      <input class="form-control" id="name1" name="name1" ng-model="user.name1" type="text" placeholder="@Username"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="text">
@@ -54,7 +57,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="text" name="text" type="text" placeholder="Love is Food"/>
+      <input class="form-control" id="text" name="text" type="text" ng-model="user.quote" placeholder="Love is Food"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="email">
@@ -63,7 +66,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="email" name="email" type="text" placeholder="@Gmail"/>
+      <input class="form-control" id="email" name="email" type="text" ng-model="user.email" placeholder="@Gmail"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="number">
@@ -72,7 +75,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="number" name="number" type="text" placeholder="+880-XXXXXXXXX"/>
+      <input class="form-control" id="number" name="number" type="text" ng-model="user.number" placeholder="+880-XXXXXXXXX"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="text1">
@@ -81,7 +84,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="text1" name="text1" type="text" placeholder="Enter Password"/>
+      <input class="form-control" id="text1" name="text1" type="text" ng-model="user.password" placeholder="Enter Password"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="text2">
@@ -90,7 +93,7 @@
         *
        </span>
       </label>
-      <input class="form-control" id="text2" name="text2" placeholder="Re-type Password" type="text"/>
+      <input class="form-control" id="text2" name="text2" placeholder="Re-type Password" ng-model="user.password1" type="text"/>
      </div>
      <div class="form-group ">
       <label class="control-label requiredField" for="date">
@@ -99,10 +102,11 @@
         *
        </span>
       </label>
-      <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" required />
+      <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" ng-model="user.dob" required />
      </div>
      <div class="form-group">
       <div>
+      	{{usersignupStatus}} <br/>
        <button class="btn btn-primary " name="submit" type="submit">
         Submit
        </button>
@@ -112,8 +116,5 @@
    </div>
   </div>
  </div>
-
-
-
 </body>
 </html>

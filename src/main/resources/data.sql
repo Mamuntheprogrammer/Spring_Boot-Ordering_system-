@@ -33,3 +33,34 @@ INSERT INTO food(id, name, image_path, price, reduce_price, category_id) VALUES(
 INSERT INTO food(id, name, image_path, price, reduce_price, category_id) VALUES(3, 'DESI small','/images/109379624.jpg',90.00,-1, 2);
 INSERT INTO food(id, name, image_path, price, reduce_price, category_id) VALUES(4, 'DESI small','/images/109379671.jpg',60.00,-1, 2);
 
+
+CREATE TABLE `final_project`.`order_info` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `table_no` VARCHAR(45) NOT NULL,
+  `user_id` INT NULL DEFAULT NULL ,
+  `order_total` FLOAT NOT NULL,
+  `comment` VARCHAR(1024) NULL,
+  PRIMARY KEY (`id`));
+
+  
+  CREATE TABLE `final_project`.`order_item` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `price` FLOAT NOT NULL,
+  `order_id` INT NOT NULL,
+  `quantity` INT(11) NOT NULL,
+  PRIMARY KEY (`id`));
+  
+  
+  CREATE TABLE `final_project`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `name1` VARCHAR(100) NULL,
+  `quote` VARCHAR(255) NULL,
+  `email` VARCHAR(100) NULL,
+  `number` VARCHAR(100) NULL,
+  `password` VARCHAR(100) NULL,
+  `password1` VARCHAR(100) NULL,
+  `dob` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
