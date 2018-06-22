@@ -69,6 +69,7 @@
                      <a th:if="${user == null}" href="/signup" target="_blank"><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">SignUp</button></a>
 				 		<div th:if="${user}">
    							<h3> User : [[${user.name1}]] </h3>
+   							<a  href="/logout" ><button type="button" class="btn btn-primary btn-md hvr-grow-shadow">Logout</button></a>
 						</div>
 						
 						<div class="modal fade" id="moda1">

@@ -32,4 +32,16 @@ public class DigitalOrderSystemController {
 	public String navToSignup(Model model) {
 		return "login";
 	}
+	
+	@GetMapping(value="/logout")
+	public String logout(Model model,  HttpServletRequest request) {
+		
+		User user = (User)request.getSession().getAttribute("user");
+		
+		if(user != null){
+			request.getSession().setAttribute("user",null);
+		}
+		
+		return "index";
+	}
 }
