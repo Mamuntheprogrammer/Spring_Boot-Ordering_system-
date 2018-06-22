@@ -32,6 +32,7 @@ public class DigitalOrderSystemController {
 	public String navToSignup(Model model) {
 		return "login";
 	}
+<<<<<<< HEAD
 	
 	@GetMapping(value="/logout")
 	public String logout(Model model,  HttpServletRequest request) {
@@ -44,4 +45,6 @@ public class DigitalOrderSystemController {
 		
 		return "index";
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/Mamuntheprogrammer/final-_project.git
 }
